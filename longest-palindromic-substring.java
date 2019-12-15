@@ -17,34 +17,36 @@ class Solution {
             Function called Expanding the window which takes two input indexes and outputs max palindrome
         */
         
-        String maxPalindromeResult = new String("");
-        for(int i = 0; i < s.length(); i++){
-            if(i + 1 < s.length() && s.charAt(i) == s.charAt(i + 1)){
+        int sL = s.length();
+        if(sL == 0 ){
+            return "";
+        }
+        String maxPalindromeResult = new String(s.substring(0,1));
+        for(int i = 0; i < sL; i++){
+            if(i + 1 < sL && s.charAt(i) == s.charAt(i + 1)){
                 int maxRepeat = 0;
-                while(i + maxRepeat + 1 < s.length() && s.charAt(i) == s.charAt(i + maxRepeat + 1)){
+                while(i + maxRepeat + 1 < sL && s.charAt(i) == s.charAt(i + maxRepeat + 1)){
                     maxRepeat = maxRepeat + 1;
                 }
                 String tempPalindrome1 = new String(maxPalindrome(i,i + maxRepeat, s));
                 if(maxPalindromeResult.length() < tempPalindrome1.length()){
                     maxPalindromeResult = tempPalindrome1;
                 }
-                i = i + maxRepeat + 1;
-            } else if (i + 1 < s.length() && (i - 1) >= 0 && s.charAt(i - 1) == s.charAt(i + 1)){
+                i = i + maxRepeat;
+            } else if (i + 1 < sL && (i - 1) >= 0 && s.charAt(i - 1) == s.charAt(i + 1)){
                 String tempPalindrome2 = new String(maxPalindrome(i, i, s));
                 if(maxPalindromeResult.length() < tempPalindrome2.length()){
                     maxPalindromeResult = tempPalindrome2;
                 }
             }
         }
-        
         return maxPalindromeResult;
-        
     }
     public static String maxPalindrome(int start, int end, String s){
-        String result = new String(s.substring(start, end));
-        while(start - 1 > 0 && end + 1 < s.length()){
+        String result = new String(s.substring(start, end + 1));
+        while(start - 1 >= 0 && end + 1 < s.length()){
             if(s.charAt(start - 1) == s.charAt(end + 1)){
-                result = s.charAt(start - 1) + s.substring(start, end + 1) + s.charAt(end - 1);
+                result = s.charAt(start - 1) + s.substring(start, end + 1) + s.charAt(end + 1);
                 start = start - 1; end = end + 1;
             } else {
                 break;
