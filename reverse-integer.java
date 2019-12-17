@@ -22,15 +22,14 @@ class Solution {
         while(result.charAt(0) == '0'){
             result = result.substring(1);
         }
-        //size check
-        long longResult = Long.parseLong(result);
-        if(!positive){
-            longResult = -longResult;
-        }
-        if(longResult > Math.pow(2, 31) - 1 || longResult < - Math.pow(2, 31)){
+        int intResult = 0;
+        try {
+            intResult = positive?Integer.parseInt(result):-Integer.parseInt(result);
+        } catch(Exception e){
             return 0;
         }
-        int intResult = (int)longResult;
         return intResult;
     }
 }
+
+
