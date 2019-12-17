@@ -7,7 +7,7 @@ class Solution {
         boolean goingDown = true;
         int counter = 1; int x = 0; int y = 0;
         for(int j = 0; j < numRows; j++){
-            Map<Integer,String> dummyMap = new HashMap<Integer, String>();
+            Map<Integer,String> dummyMap = new LinkedHashMap<Integer, String>();
             arrayOfMaps.add(dummyMap);
         }
         for(int i = 0; i < s.length(); i++){
