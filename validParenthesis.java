@@ -107,3 +107,36 @@ class Solution {
     }
 }
 
+class Solution {
+    public boolean isValid(String s) {
+        LinkedList<String> stack = new LinkedList<String>();
+        for(char c: s.toCharArray()){
+            if(c == '(' || c == '{' || c == '['){
+                stack.add(String.valueOf(c));
+            } else if(c == ')'){
+                if(!stack.isEmpty()){
+                    if("(".equals(stack.removeLast())){
+                        continue;
+                    }
+                }
+                return false;
+            } else if(c == '}'){
+                if(!stack.isEmpty()){
+                    if("{".equals(stack.removeLast())){
+                        continue;
+                    }
+                }
+                return false;
+            } else if(c == ']'){
+                if(!stack.isEmpty()){
+                    if("[".equals(stack.removeLast())){
+                        continue;
+                    }
+                }
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+}
+
