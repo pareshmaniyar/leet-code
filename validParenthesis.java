@@ -41,3 +41,69 @@ class Solution {
         }
     }
 }
+
+class Solution {
+    public boolean isValid(String s) {
+        // Stack
+        /**
+            Data type:
+            1. Array with half the elements
+            2. Linked List
+            3. Inbuilt Stack
+        */
+        //LinkedList
+        LinkedList<String> stack = new LinkedList<String>();
+        for(char c: s.toCharArray()){
+            if(c == '(' || c == '{' || c == '['){
+                stack.add(String.valueOf(c));
+                // System.out.println("stack: " + stack);
+            } else if(c == ')'){
+                // System.out.println("stack5: " + stack.peek());
+                // System.out.println("stack6: " + (stack.peek() instanceof String));
+                if(stack.isEmpty()){
+                    return false;
+                } else {
+                    if("(".equals(stack.removeLast())){
+                        // System.out.println("stack7: " + stack);
+                    } else {
+                        // System.out.println("stack7.1: " + stack);
+                        return false;
+                    }
+                }
+            } else if(c == '}'){
+                if(stack.isEmpty()){
+                    return false;
+                } else {
+                    if("{".equals(stack.removeLast())){
+                        // System.out.println("stack2: " + stack);
+                    } else {
+                        // System.out.println("stack2.1: " + stack);
+                        return false;
+                    }
+                }
+                // if(stack.isEmpty() || stack.remove() != "{"){
+                //     System.out.println("stack2: " + stack);
+                //     return false;
+                // }
+            } else if(c == ']'){
+                if(stack.isEmpty()){
+                    return false;
+                } else {
+                    if("[".equals(stack.removeLast())){
+                        // System.out.println("stack3: " + stack);
+                    } else {
+                        // System.out.println("stack3.1: " + stack);
+                        return false;
+                    }
+                }
+                // if(stack.isEmpty() || stack.remove() != "["){
+                //     System.out.println("stack3: " + stack);
+                //     return false;
+                // }
+            }
+        }
+        // System.out.println("stack4: " + stack);
+        return stack.isEmpty();
+    }
+}
+
