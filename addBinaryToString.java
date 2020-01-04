@@ -5,11 +5,12 @@ class Solution {
         if(refa < 0 && refb < 0){
             return "0";
         }
-        String res = "";String temp = "";boolean carry = false;
+        StringBuilder res = new StringBuilder();
+        String temp = "";boolean carry = false;
         while(refa >= 0 || refb >= 0 ){
             if(refa < 0){
                 if(!carry)
-                    return b.substring(0, refb + 1) + res;
+                    return b.substring(0, refb + 1) + res.reverse().toString();
                 for(int i = 0; i <= refb; i++){
                     a = "0" + a;
                 }
@@ -17,7 +18,7 @@ class Solution {
             }
             if(refb < 0){
                 if(!carry)
-                    return a.substring(0, refa + 1) + res;
+                    return a.substring(0, refa + 1) + res.reverse().toString();
                 for(int i = 0; i <= refa; i++){
                     b = "0" + b;
                 }
@@ -40,11 +41,11 @@ class Solution {
                 if(carry) temp = "1";
                 carry = true;
             }
-            res = temp + res;
+            res.append(temp);
             refa = refa - 1;
             refb = refb - 1;
         }
-        if(carry) res = "1" + res;
-        return res;
+        if(carry) res.append("1");
+        return res.reverse().toString();
     }
 }
