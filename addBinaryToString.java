@@ -2,21 +2,26 @@ class Solution {
     public String addBinary(String a, String b) {
         int refa = a.length() - 1;
         int refb = b.length() - 1;
+        if(refa < 0 && refb < 0){
+            return "0";
+        }
         String res = "";String temp = "";boolean carry = false;
         while(refa >= 0 || refb >= 0 ){
             if(refa < 0){
-                for(int i = 0; i < refb; i++){
-                    b = "0" + b;
-                }
-                refa = refb;
-                // return b.substring(0, refb + 1) + res;
-            }
-            if(refb < 0){
-                for(int i = 0; i < refa; i++){
+                if(!carry)
+                    return b.substring(0, refb + 1) + res;
+                for(int i = 0; i <= refb; i++){
                     a = "0" + a;
                 }
+                refa = refb;
+            }
+            if(refb < 0){
+                if(!carry)
+                    return a.substring(0, refa + 1) + res;
+                for(int i = 0; i <= refa; i++){
+                    b = "0" + b;
+                }
                 refb = refa;
-                // return a.substring(0, refa + 1) + res;
             }
             if(a.charAt(refa) == '0' && b.charAt(refb) == '0'){
                 temp = "0";
