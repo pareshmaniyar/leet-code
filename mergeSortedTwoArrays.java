@@ -38,7 +38,7 @@ class Solution {
                 temp = nums1[i];
                 nums1[i] = carry[carryLeft];
                 carryLeft = carryLeft + 1;
-                System.out.println("carry1: " + Arrays.toString(carry) + ", temp: " + temp + ", carryRight: "+ carryRight + ", carryLeft: "+ carryLeft);
+                // System.out.println("carry1: " + Arrays.toString(carry) + ", temp: " + temp + ", carryRight: "+ carryRight + ", carryLeft: "+ carryLeft);
                 carry[carryRight] = temp;
                 carryRight = carryRight + 1;
             }
