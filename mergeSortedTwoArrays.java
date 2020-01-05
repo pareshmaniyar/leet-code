@@ -17,8 +17,8 @@ class Solution {
         if(n == 0){
             return;
         }
-        int[] carry = new int[n];
-        for(int i = 0; i < n; i++){
+        int[] carry = new int[m + n];
+        for(int i = 0; i < m + n; i++){
             carry[i] = Integer.MAX_VALUE;
         }
         int ref = 0;int carryRight = 0;int carryLeft = 0;int temp = 0;
@@ -28,7 +28,7 @@ class Solution {
             ref = ref + 1;
             carryRight = carryRight + 1;
         }
-        for(int i = 0; i < m; i++){
+        for(int i = 1; i < m; i++){
             if(ref < n && nums1[i] > nums2[ref] && carry[carryLeft] > nums2[ref]) {
                 carry[carryRight] = nums1[i];
                 carryRight = carryRight + 1;
@@ -37,8 +37,12 @@ class Solution {
             } else if(nums1[i] > carry[carryLeft]){
                 temp = nums1[i];
                 nums1[i] = carry[carryLeft];
-                carry[carryLeft] = temp;
+                carryLeft = carryLeft + 1;
+                System.out.println("carry1: " + Arrays.toString(carry) + ", temp: " + temp + ", carryRight: "+ carryRight + ", carryLeft: "+ carryLeft);
+                carry[carryRight] = temp;
+                carryRight = carryRight + 1;
             }
+        // System.out.println("carry: " + Arrays.toString(carry));
         }
         for(int i = m; i < m + n; i++){
             if(ref < n && carry[carryLeft] > nums2[ref]) {
