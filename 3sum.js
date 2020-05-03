@@ -8,18 +8,27 @@ var threeSum = function(nums) {
     //if sum is zero, add to the main array
     let res = [];
     let finalResult = [];
-    for(let i = 0; i < nums.length; i++) {
-        for(let j = i + 1; j < nums.length; j++){
-            for(let k = j + 1; k < nums.length; k++){
-                res = [];
-                res.push(nums[i]);
-                res.push(nums[j]);
-                res.push(nums[k]);
-                if(nums[i] + nums[j] + nums[k] == 0 && isUnique(res)) {
-                    finalResult.push(res);
-                }
-            }
+    let nums = nums.sort();//nlogn
+    for(){
+        
+    }
+    function binarySearch(num, start, end) { //logn
+        if(num == nums[start]) {
+            return start;
         }
+        if(num == nums[end]) {
+            return end;
+        }
+        let mid = start + (start + end) / 2;
+        if(num == nums[mid]) {
+            return mid;
+        }
+        if(num > nums[mid]) {
+            return binarySearch(num, mid + 1, end)
+        } else {
+            return binarySearch(num, start, mid);
+        }
+        return -1;
     }
     function isUnique(res) {
         for(let i = 0; i < finalResult.length; i++) {
