@@ -9,8 +9,31 @@ var threeSum = function(nums) {
     let res = [];
     let finalResult = [];
     let nums = nums.sort();//nlogn
-    for(){
-        
+    for(let i = 0; i < nums.length; i++){
+        let results = returnUniquePair(nums.slice(i + 1), nums[i]);
+        results.map(arr => {
+            res = [nums[i]];
+            res.push(...arr);
+            finalResult.push(res);
+        });
+    }
+    function returnUniquePair(arr, num) {
+        let finalResult = [];
+        let res = [];
+        let map = {};
+        arr.forEach(item => {
+            let comp = (num - item) + '';
+            if(map.hasOwnProperty(comp)) {
+                if(map[comp] === true) {
+                    res.push(item);
+                    res.push(comp);
+                    finalResult.push(res);
+                    map[comp] = false;
+                }
+            } else {
+                map[item] = true;
+            }
+        })
     }
     function binarySearch(num, start, end) { //logn
         if(num == nums[start]) {
@@ -19,16 +42,18 @@ var threeSum = function(nums) {
         if(num == nums[end]) {
             return end;
         }
-        let mid = start + (start + end) / 2;
+        if(start >= end) {
+            return -1;
+        }
+        let mid = Math.floor(start + (start + end) / 2);
         if(num == nums[mid]) {
             return mid;
         }
         if(num > nums[mid]) {
-            return binarySearch(num, mid + 1, end)
+            return binarySearch(num, mid + 1, end);
         } else {
-            return binarySearch(num, start, mid);
+            return binarySearch(num, start, mid - 1);
         }
-        return -1;
     }
     function isUnique(res) {
         for(let i = 0; i < finalResult.length; i++) {
